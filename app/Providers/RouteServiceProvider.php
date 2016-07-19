@@ -3,6 +3,9 @@
 namespace App\Providers;
 
 use Illuminate\Routing\Router;
+use Illuminate\Http\Request;
+use Chipaau\Versioning\RouteNameSpaceBinder;
+use Illuminate\Routing\Events\RouteMatched;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 
 class RouteServiceProvider extends ServiceProvider
@@ -35,9 +38,9 @@ class RouteServiceProvider extends ServiceProvider
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    public function map(Router $router)
+    public function map(Router $router, Request $request, RouteNameSpaceBinder $binder)
     {
-        $this->mapWebRoutes($router);
+        $this->mapWebRoutes($router, $request, $binder);
 
         //
     }
@@ -50,8 +53,12 @@ class RouteServiceProvider extends ServiceProvider
      * @param  \Illuminate\Routing\Router  $router
      * @return void
      */
-    protected function mapWebRoutes(Router $router)
+    protected function mapWebRoutes(Router $router, Request $request, $binder)
     {
+        $router->matched(function(RouteMatched $event) use ($binder) {
+            $binder->changeBindings($event->route);
+        });
+
         $router->group([
             'namespace' => $this->namespace, 'middleware' => 'web',
         ], function ($router) {

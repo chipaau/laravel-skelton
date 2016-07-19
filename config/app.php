@@ -148,6 +148,9 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
+
+        Chipaau\JsonApi\Providers\LaravelServiceProvider::class,
+
         /*
          * Application Service Providers...
          */
