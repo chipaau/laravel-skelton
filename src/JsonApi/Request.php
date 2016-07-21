@@ -149,7 +149,7 @@ abstract class Request extends IlluminateRequest implements ValidatesWhenResolve
      */
     protected function getParameterRules()
     {
-        return null;
+        return array();
     }
 
     /**

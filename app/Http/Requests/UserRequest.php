@@ -12,6 +12,11 @@ class UserRequest extends Request
     /** Related schema class */
     const SCHEMA = Schema::class;
 
+    protected function includeParameters()
+    {
+        return array('comments');
+    }
+
     /**
      * Validate input for 'store' action.
      *

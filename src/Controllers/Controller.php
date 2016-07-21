@@ -52,10 +52,9 @@ abstract class Controller extends IlluminateController implements ControllerInte
      */
     public function index(Request $request, $resource = null)
     {
-        dd('here controller', $this->response);
         $parameters = $this->getRequest()->getParameters();
         $data = $this->repository->collection();
-        dd($data);
+        dd($parameters);
         //here its ok
         $pagedData = $this->callApiIndex($parameters);
         return $this->getResponses()->getPagedDataResponse($pagedData);
@@ -92,6 +91,14 @@ abstract class Controller extends IlluminateController implements ControllerInte
     protected function getRequest()
     {
         return $this->request;
+    }
+
+    /**
+     * @return JsonApiRequest
+     */
+    protected function getRepository()
+    {
+        return $this->repository;
     }
 
     /**
