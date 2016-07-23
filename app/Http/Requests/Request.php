@@ -3,44 +3,53 @@
 namespace App\Http\Requests;
 
 use Chipaau\JsonApi\Request AS JsonApiRequest;
+use Chipaau\Repositories\Repository;
 
 /**
 * Abstract JsonApiRequest
 */
 class Request extends JsonApiRequest
 {
-    
-    /** Query parameter */
-    const PARAM_PAGING_SIZE = 'size';
-    /** Query parameter */
-    const PARAM_PAGING_NUMBER = 'number';
 
     /**
      * @inheritdoc
      */
     protected function getParameterRules()
     {
-        return [
-            self::RULE_ALLOWED_PAGING_PARAMS => $this->pagingParameters(),
-            self::RULE_ALLOW_UNRECOGNIZED => $this->unrecognizedParameters(),
-            self::RULE_ALLOWED_INCLUDE_PATHS => $this->includeParameters(),
-            self::RULE_ALLOWED_FIELD_SET_TYPES => $this->fieldSetParameters(),
-            self::RULE_ALLOWED_SORT_FIELDS => $this->sortFieldParameters(),
-            self::RULE_ALLOWED_FILTERING_PARAMS => $this->filteringParameters(),
-        ];
-    }
+        $rules = array();
+        if (!empty($this->pagingParameters())) {
+            $rules[self::RULE_ALLOWED_PAGING_PARAMS] = $this->pagingParameters();
+        }
 
-    protected function getPagingParameters()
-    {
-        return [
-            self::PARAM_PAGING_SIZE,
-            self::PARAM_PAGING_NUMBER
-        ];
+        if (!empty($this->unrecognizedParameters())) {
+            $rules[self::RULE_ALLOW_UNRECOGNIZED] = $this->unrecognizedParameters();
+        }
+
+        if (!empty($this->includeParameters())) {
+            $rules[self::RULE_ALLOWED_INCLUDE_PATHS] = $this->includeParameters();
+        }
+
+        if (!empty($this->fieldSetParameters())) {
+            $rules[self::RULE_ALLOWED_FIELD_SET_TYPES] = $this->fieldSetParameters();
+        }
+        
+        if (!empty($this->sortFieldParameters())) {
+            $rules[self::RULE_ALLOWED_SORT_FIELDS] = $this->sortFieldParameters();
+        }
+
+        if (!empty($this->filteringParameters())) {
+            $rules[self::RULE_ALLOWED_FILTERING_PARAMS] = $this->filteringParameters();
+        }
+        
+        return $rules;
     }
 
     protected function pagingParameters()
     {
-        return array();
+        return [
+            Repository::PARAM_PAGING_SIZE,
+            Repository::PARAM_PAGING_NUMBER
+        ];
     }
 
     protected function unrecognizedParameters()

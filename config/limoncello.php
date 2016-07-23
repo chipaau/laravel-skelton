@@ -37,14 +37,13 @@ return [
     S::JSON => [
         S::JSON_OPTIONS         => JSON_PRETTY_PRINT,
         S::JSON_DEPTH           => S::JSON_DEPTH_DEFAULT,
-        S::JSON_IS_SHOW_VERSION => S::JSON_IS_SHOW_VERSION_DEFAULT,
+        S::JSON_IS_SHOW_VERSION => !S::JSON_IS_SHOW_VERSION_DEFAULT,
         S::JSON_URL_PREFIX      => null,
-        S::JSON_VERSION_META    => null
-        // [
-        //     'name'       => 'JSON API Neomerx Demo Application',
-        //     'copyright'  => '2015-2016 info@neomerx.com',
-        //     'powered-by' => 'Neomerx limoncello collins',
-        // ],
+        S::JSON_VERSION_META    => [
+            'name'  =>  'Chipaau Skelton Application',
+            'copyright'  => '2016 chipaau@gmail.com',
+            'powered-by' => 'Neomerx limoncello',
+        ],
     ],
 
     S::AUTH => [
