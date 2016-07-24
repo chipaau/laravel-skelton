@@ -18,11 +18,18 @@ class UserSchema extends Schema
     /** Attribute name */
     const ATTR_NAME = 'name';
 
+    const REL_ROLES = 'roles';
+
     /**
      * @inheritdoc
      */
     protected function getSchemaMappings()
     {
+
+        $hasMany    = [
+            self::REL_ROLES => [User::REL_ROLES, self::TYPE_PAGINATED, 10],
+        ];
+
         return [
             self::IDX_TYPE => self::TYPE,
 
@@ -31,6 +38,8 @@ class UserSchema extends Schema
                 self::ATTR_CREATED_AT => User::FIELD_CREATED_AT,
                 self::ATTR_UPDATED_AT => User::FIELD_UPDATED_AT,
             ],
+
+            self::IDX_HAS_MANY   => $hasMany,
 
         ];
     }

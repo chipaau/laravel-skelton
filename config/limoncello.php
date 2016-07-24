@@ -1,6 +1,7 @@
 <?php
 
 use App\Schemas\UserSchema;
+use App\Schemas\RoleSchema;
 use Neomerx\Limoncello\Settings\Settings as S;
 
 return [
@@ -15,7 +16,8 @@ return [
     |
     */
     S::SCHEMAS => [
-        UserSchema::class
+        UserSchema::class,
+        RoleSchema::class
     ],
 
     /*

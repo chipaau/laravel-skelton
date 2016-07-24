@@ -148,9 +148,11 @@ return [
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
 
-
+        //json api integration
         Chipaau\JsonApi\Providers\LaravelServiceProvider::class,
-
+        //oauth authentication
+        LucaDegasperi\OAuth2Server\Storage\FluentStorageServiceProvider::class,
+        LucaDegasperi\OAuth2Server\OAuth2ServerServiceProvider::class,
         /*
          * Application Service Providers...
          */
@@ -206,5 +208,9 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
 
     ],
+
+    'subdomains' => [
+        // 'accounts'
+    ]
 
 ];

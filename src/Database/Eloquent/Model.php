@@ -9,5 +9,6 @@ use Illuminate\Database\Eloquent\Model AS EloquentModel;
 */
 abstract class Model extends EloquentModel
 {
-    
+    abstract function relations();
+    abstract function mappings();
 }

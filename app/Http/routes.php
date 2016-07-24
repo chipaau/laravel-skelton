@@ -11,6 +11,11 @@
 |
 */
 
+
+Route::group(['domain' => 'accounts.laravel.local'], function ($router) {
+    Route::auth();
+});
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -18,4 +23,3 @@ Route::get('/', function () {
 Route::group(['prefix' => 'api'], function() {
     Route::resource('users', 'UsersController');
 });
-
